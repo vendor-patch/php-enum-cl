@@ -1,6 +1,6 @@
 {
-    "name": "marc-mabe/enum-cl",
-    "description": "Compatibility layer for emulating enumerations in PHP < 8.1 and native enumerations in PHP >= 8.1",
+    "name": "vendor-patch/enum-cl",
+    "description": "Forked from marc-mabe/php-enum-cl (try to implement advanced switches/autoloading insteadof iclude ambigious class files...?). Compatibility layer for emulating enumerations in PHP < 8.1 and native enumerations in PHP >= 8.1",
     "type": "library",
     "keywords": [
         "enum", "enumeration", "enumerator", "case", "cases",
@@ -16,20 +16,22 @@
     }],
     "license": "BSD-3-Clause",
     "require": {
-        "php":                  "^7.1 | ^8.0",
+        "php":                  ">=8.0",
         "ext-reflection":       "*",
-        "composer-runtime-api": "^2.0"
+        "composer-runtime-api": "^2.0",
+        "frdl/webfat": "*",
+        "nette/php-generator": "*"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.3.0",
-        "phpunit/phpunit": "^7.5.20 | ^8.5.22 | ^9.5.11",
-        "vimeo/psalm": "^4.17.0"
+        "marc-mabe/php-enum-cl": "*"
     },
     "autoload": {
         "psr-4": {
             "Mabe\\Enum\\Cl\\": "src/psr-4",
             "": "src/stubs"
         },
-        "files": [ "src/functions.php" ]
+        "files": [ 
+            "src/functions.php"
+        ]
     }
 }
