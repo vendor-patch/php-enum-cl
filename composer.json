@@ -19,7 +19,7 @@
         "php":                  ">=8.0",
         "ext-reflection":       "*",
         "composer-runtime-api": "^2.0",
-        "frdl/webfat": "*",
+        "frdlweb/webfat": "*",
         "nette/php-generator": "*"
     },
     "require-dev": {
