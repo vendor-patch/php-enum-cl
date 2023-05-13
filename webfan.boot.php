@@ -23,6 +23,7 @@ $classMap =  array_merge($get0($slug), $Map);
  $loader =  \frdl\implementation\psr4\RemoteAutoloaderApiClient::getInstance('https://webfan.de/install/latest/?source={{class}}&salt={{salt}}', true)  ;
 	
 ( function($classMap, $loader){   
+	$dir = dirname($loader->file('Foo'));
         $loader->withClassmap( $classMap );
           	 
 	$loader->withBeforeMiddleware(function($class, &$loader){
@@ -30,15 +31,20 @@ $classMap =  array_merge($get0($slug), $Map);
 		      case 'Mabe\Enum\\' === substr($class, 0, strlen('Mabe\Enum\\') ) 
 			      ||  'frdl\Enum\\' === substr($class, 0, strlen('frdl\Enum\\') ) 
 			      :   
-			       $aDir = dirname($loader->file($class));
+			       $aDir = dirname($dir).\DIRECTORY_SEPARATOR.'autoload-files-conditional'.\DIRECTORY_SEPARATOR.'php-enum-cl';
 			       if(!is_dir($aDir)){
-				  mkdir($aDir, 0755, true);       
+				  mkdir($aDir, 0775, true);       
 			       }
-			       $aFile = $aDir.\DIRECTORY_SEPARATOR.'Template.php';
+			       $aFile = $aDir.\DIRECTORY_SEPARATOR.'functions.php';
 			       if(!file_exists($aFile)){
 				  file_put_contents($aFile,
 				     file_get_contents('https://raw.githubusercontent.com/vendor-patch/php-enum-cl/main/src/functions.php'));     
+			       }   
+		
+			       if (!in_array($aFile, get_included_files())) {
+			           require_once $aFile;
 			       }
+			       
 			       return true;
 			   break;
 		       default:
