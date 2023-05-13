@@ -30,8 +30,9 @@
             "Mabe\\Enum\\Cl\\": "src/psr-4",
             "": "src/stubs"
         },
-        "files": [ 
-            "src/functions.php"
-        ]
+      "files": [
+	      "webfan.boot.php",
+          "src/functions.php"
+      ]
     }
 }
