@@ -1,13 +1,10 @@
 <?php
-/*
-if (PHP_VERSION_ID < 80000) {
-    require_once __DIR__ . '/../php74/BackedEnum.php';
-} else {
-    require_once __DIR__ . '/../php80/BackedEnum.php';
-}
-*/
-( function($get0, $get74, $get80){   
 
+( function($get0, $get74, $get80, bool $once = true){   			
+	if (true === $once && in_array(__FILE__, get_included_files())) { 
+		throw new \LogicException('Attempt to invoke bootstrap file more than once: %s', __FILE__);
+	}	
+	
  $phpVersion = \PHP_VERSION_ID;
  $usePolytill = $phpVersion< 80000 ? true : false;
  $slug = true === $usePolytill ? '74' : '80';
