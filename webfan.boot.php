@@ -19,14 +19,38 @@ if (PHP_VERSION_ID < 80000) {
         }
 
 $classMap =  array_merge($get0($slug), $Map);	
+
+ $loader =  \frdl\implementation\psr4\RemoteAutoloaderApiClient::getInstance('https://webfan.de/install/latest/?source={{class}}&salt={{salt}}', true)  ;
 	
-	
-( function($classMap){   
-     \frdl\implementation\psr4\RemoteAutoloaderApiClient::getInstance('https://webfan.de/install/latest/?source={{class}}&salt={{salt}}', true)       
-            ->withClassmap( $classMap );
-     
+( function($classMap, $loader){   
+        $loader->withClassmap( $classMap );
+          	 
+	$loader->withBeforeMiddleware(function($class, &$loader){
+	       switch($class){
+		      case 'Mabe\Enum\\' === substr($class, 0, strlen('Mabe\Enum\\') ) 
+			      ||  'frdl\Enum\\' === substr($class, 0, strlen('frdl\Enum\\') ) 
+			      :   
+			       $aDir = dirname($loader->file($class));
+			       if(!is_dir($aDir)){
+				  mkdir($aDir, 0755, true);       
+			       }
+			       $aFile = $aDir.\DIRECTORY_SEPARATOR.'Template.php';
+			       if(!file_exists($aFile)){
+				  file_put_contents($aFile,
+				     file_get_contents('https://raw.githubusercontent.com/vendor-patch/php-enum-cl/main/src/functions.php'));     
+			       }
+			       return true;
+			   break;
+		       default:
+			    return true;
+			  break;
+	       }
+	   
+	    /*   return true;  return false to skip this autoloader, return any/VOID to continue */
+          });     
  } )(
-  $classMap
+  $classMap,
+  $loader
 );   
   
   
