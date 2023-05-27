@@ -64,7 +64,7 @@ $classMap =  array_merge($get0($slug), $Map);
   function($slug){
     return [
 	    'Mabe\Enum\Cl\\' => sprintf('https://raw.githubusercontent.com/vendor-patch/php-enum-cl/main/src/php%s/${class}.php?cache_bust=${salt}', $slug),
-	    'Mabe\Enum\Cl\\' => 'https://raw.githubusercontent.com/vendor-patch/php-enum-cl/main/src/psr-4/${class}.php?cache_bust=${salt}',
+	   // 'Mabe\Enum\Cl\\' => 'https://raw.githubusercontent.com/vendor-patch/php-enum-cl/main/src/psr-4/${class}.php?cache_bust=${salt}',
 	    \UnitEnum::class => 'https://raw.githubusercontent.com/vendor-patch/php-enum-cl/main/src/stubs/UnitEnum.php?cache_bust=${salt}',
             \ValueError::class=>'https://raw.githubusercontent.com/vendor-patch/php-enum-cl/main/src/stubs/ValueError.php?cache_bust=${salt}',
       ];
