@@ -13,7 +13,7 @@ use BackedEnum;
  *
  * @psalm-immutable
  */
-abstract class EmulatedStringEnum implements BackedEnum
+abstract class EmulatedStringEnum //implements BackedEnum
 {
     use EmulatedBackedEnumTrait;
 
