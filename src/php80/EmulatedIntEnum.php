@@ -16,7 +16,7 @@ use ValueError;
  *
  * @psalm-immutable
  */
-abstract class EmulatedIntEnum implements BackedEnum
+abstract class EmulatedIntEnum //implements BackedEnum
 {
     use EmulatedBackedEnumTrait;
 
